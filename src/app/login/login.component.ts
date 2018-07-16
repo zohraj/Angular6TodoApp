@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,21 +15,51 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
     repeatPassword: '',
-    formType: '',
+    formType: '2'
+
   }
-  myform: FormGroup;
-  constructor(private http: HttpClient) { }
+  myform: FormGroup
+
+  constructor(private http: HttpClient, public router: Router) { }
 
   ngOnInit(): void {
-    this.http.get("https://randomuser.me/api/").subscribe(data =>{
-      console.log(data);
-    })
+
   }
   onSubmit() {
-    if (this.myform.valid) {
-      console.log("Form Submitted!");
+    // if (this.myform.valid) {
+    switch (this.model.formType) {
+      case '1':
+        this.doLogin(this.model);
+        break;
+      case '2':
+        this.doRegister(this.model);
+        break;
+      default:
+      //do nothing
     }
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
-  }
 
+  }
+  doLogin(params) {
+
+    this.http.post("http://localhost:5000/login", {
+      username: params.username,
+      password: params.password
+    }).subscribe((data: any) => {
+     
+      if(data.code==2020){
+       this.redirectToList();
+      }
+    });
+  }
+  doRegister(params) {
+    this.http.post("http://localhost:5000/register", params).subscribe((data:any) => {
+      this.redirectToList();
+      
+    });
+
+  }
+  redirectToList(){
+    localStorage.setItem("token","loggedIn");
+      this.router.navigate(["list"]);
+  }
 }

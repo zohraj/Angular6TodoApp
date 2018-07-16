@@ -1,0 +1,101 @@
+// colors
+$color-body: #1abc9c;
+$color-accent: #6f4e37;
+$color-input: #fff;
+
+
+//    fix position radio input off-canvas
+input[type="radio"] {
+    position: fixed;
+    left: -100px;
+}
+
+//    style input fields (note hidden by default) 
+input:not([type="radio"]) {
+    appearance: none;
+    background-color: $color-input;
+    display: block;
+    transition: 300ms ease;
+    border-radius: 7px;
+    border: 0;
+    height: 36px;
+    
+    overflow: hidden;
+    width: 70%;
+    margin: 0 auto !important;
+    padding: 0 10px;
+    margin-bottom:10px !important;
+
+    font-size: 16px;
+    text-align: center;
+    outline: 0;
+}
+
+
+
+//    submit button 
+button {
+    width: 250px;
+    height: 40px;
+    border-radius: 7px;    
+    background-color: $color-accent;
+    font-size: 15px;
+    color:white;
+    &:before { font-size: 16px; }
+}
+
+
+
+//            
+label {
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    margin-bottom: 16px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    font-size:30px;
+    cursor: pointer;
+    color: $color-accent;
+    transition: 300ms ease;
+    width: calc(100% / 3 - 4px);
+    
+    //    pointer arrow
+    &:after {
+        content: '';
+        border: 10px solid transparent;
+        position: absolute;
+        bottom: -10px;
+        left: calc(50% - 10px);
+        transition: inherit;
+    }
+}
+
+
+//    flex does not work well on fiedset 
+//    why we use a styling wrapper
+.flex-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 600px;
+    text-align: center;
+}
+.bg{
+    background-image: url("/assets/images/bg.jpg");
+    opacity: 0.7;
+    height:100%;
+    width: 100%;
+    position: absolute;
+}
+body {
+    background-color: $color-body;
+    background:blue;
+    font-size: 16px;
+}
+fieldset{
+    z-index: 1;
+    width:500px;
+}

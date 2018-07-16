@@ -1,0 +1,38 @@
+<nav>
+  <div class="nav-bg"></div>
+  <ul>
+    <li>
+      <a href="add-todo">Add Todo</a>
+    </li>
+    <li>
+      <a href="logout">Logout</a>
+    </li>
+
+  </ul>
+</nav>
+<div class="container">
+
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">
+        <a id="name" class="filter__link" href="#">Title</a>
+      </div>
+      <div class="header__item">
+        <a id="wins" class="filter__link filter__link--number" href="#">Description</a>
+      </div>
+
+      <div class="header__item">
+        <a id="total" class="filter__link filter__link--number" href="#">Action</a>
+      </div>
+    </div>
+    <div class="table-content">
+
+      <div class="table-row" *ngFor="let item of todoList">
+        <div class="table-data">{{item.title}}</div>
+        <div class="table-data">{{item.description}}</div>
+        <div class="table-data">Edit Delete</div>
+      </div>
+
+    </div>
+  </div>
+</div>

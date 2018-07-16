@@ -2,10 +2,10 @@
 <div class="flex-wrap">
     <div class="bg"></div>
     <fieldset>
-        <form (ngSubmit)="onSubmit()" novalidate>
-            <input type="radio" name="rg" id="sign-in" checked/>
-            <input type="radio" name="rg" id="sign-up" />
-            <input type="radio" name="rg" id="reset" />
+        <form #myform= "ngForm"(ngSubmit)="onSubmit()" novalidate>
+            <input type="radio" name="rg" id="sign-in" value="1" [(ngModel)]="model.formType" required #formType="ngModel" checked/>
+            <input type="radio" name="rg" id="sign-up" value="2" [(ngModel)]="model.formType" required #formType="ngModel" />
+            <input type="radio" name="rg" id="reset" value="3" [(ngModel)]="model.formType" required #formType="ngModel" />
 
             <label for="sign-in">Sign in</label>
             <label for="sign-up">Sign up</label>
@@ -28,7 +28,7 @@
                 [ngModelOptions]="{updateOn: 'change'}" />
             <div [hidden]="repeatPassword.valid || repeatPassword.pristine" class="alert alert-danger">Confirm Password is required</div>
             <button type="submit">Submit</button>
-            <div *ngIf="model.name">{{model.name}}</div>
         </form>
     </fieldset>
+   
 </div>
