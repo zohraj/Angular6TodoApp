@@ -23,9 +23,10 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, public router: Router) { }
 
   ngOnInit(): void {
+    localStorage.removeItem("token");
 
   }
-  onSubmit() {
+  onSubmit = () => {
     // if (this.myform.valid) {
     switch (this.model.formType) {
       case '1':
@@ -44,22 +45,25 @@ export class LoginComponent implements OnInit {
     this.http.post("http://localhost:5000/login", {
       username: params.username,
       password: params.password
-    }).subscribe((data: any) => {
-     
-      if(data.code==2020){
-       this.redirectToList();
+    }).subscribe((response: any) => {
+
+      if (response.code == 2020) {
+        this.redirectToList(response.data);
       }
     });
   }
   doRegister(params) {
-    this.http.post("http://localhost:5000/register", params).subscribe((data:any) => {
-      this.redirectToList();
-      
+    this.http.post("http://localhost:5000/register", params).subscribe((response: any) => {
+      if (response.code == 2022) {
+        this.redirectToList(response.data);
+      }
+
+
     });
 
   }
-  redirectToList(){
-    localStorage.setItem("token","loggedIn");
-      this.router.navigate(["list"]);
+  redirectToList(data) {
+    localStorage.setItem("token", data._id);
+    this.router.navigate(["todo/list"]);
   }
 }

@@ -1,0 +1,18 @@
+<link href="https://codepen.io/IanHazelton/pen/RWXGep" rel="stylesheet" />
+<div class="flex-wrap">
+  <div class="bg"></div>
+  <fieldset>
+    <form #myform="ngForm" (ngSubmit)="myform.valid && onSubmit()" novalidate>
+
+      <input class="edit-todo" name="title" required [(ngModel)]="model.title" #title="ngModel" [ngModelOptions]="{updateOn: 'change'}"
+        type="text" placeholder="Title" required />
+      <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Title is required</div>
+
+      <input class="edit-todo" name="description" type="text" placeholder="Description" required [(ngModel)]="model.description"
+        #description="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+      <div [hidden]="description.valid || description.pristine" class="alert alert-danger">Description is required</div>
+      <button type="submit">Submit</button>
+    </form>
+  </fieldset>
+
+</div>

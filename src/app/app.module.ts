@@ -15,6 +15,7 @@ import { HttpModule } from '@angular/http';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
 import { AddTodoComponent } from './add-todo/add-todo.component';
+import { EditTodoComponent } from './edit-todo/edit-todo.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,11 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
     LoginComponent,
     RegisterComponent,
     TodoListComponent,
-    AddTodoComponent
+    AddTodoComponent,
+    EditTodoComponent
   ],
   imports: [
     HttpModule,
-    
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
     LayoutModule,

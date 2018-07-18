@@ -2,7 +2,7 @@
 <div class="flex-wrap">
     <div class="bg"></div>
     <fieldset>
-        <form #myform= "ngForm"(ngSubmit)="onSubmit()" novalidate>
+        <form #myform="ngForm"  (ngSubmit)="myform.valid && onSubmit()" novalidate>
             <input type="radio" name="rg" id="sign-in" value="1" [(ngModel)]="model.formType" required #formType="ngModel" checked/>
             <input type="radio" name="rg" id="sign-up" value="2" [(ngModel)]="model.formType" required #formType="ngModel" />
             <input type="radio" name="rg" id="reset" value="3" [(ngModel)]="model.formType" required #formType="ngModel" />

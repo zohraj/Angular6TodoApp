@@ -8,19 +8,24 @@ import { Router } from '@angular/router'
   styleUrls: ['./add-todo.component.scss']
 })
 export class AddTodoComponent implements OnInit {
-  model= {
+  model = {
     title: '',
     description: ''
   }
   constructor(private http: HttpClient, public router: Router) { }
 
-  ngOnInit() {
-  } 
-  onSubmit() {
-    this.http.post("http://localhost:5000/add", this.model).subscribe((data: any) => {
-      console.log(data);
-      this.router.navigate(['list']);
-    })
+  ngOnInit(): void {
+
+  }
+  onSubmit = () => {
+    this.http.post("http://localhost:5000/add", {
+      title: this.model.title,
+      description: this.model.description,
+      createdBy:localStorage.getItem("token")
+    }).subscribe((data: any) => {
+      this.router.navigate(['todo/list']);
+    });
+    
   }
 
 }

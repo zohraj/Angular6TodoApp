@@ -2,10 +2,10 @@
   <div class="nav-bg"></div>
   <ul>
     <li>
-      <a href="add-todo">Add Todo</a>
+      <a href="todo/add">Add Todo</a>
     </li>
     <li>
-      <a href="logout">Logout</a>
+      <a href="login">Logout</a>
     </li>
 
   </ul>
@@ -25,14 +25,22 @@
         <a id="total" class="filter__link filter__link--number" href="#">Action</a>
       </div>
     </div>
+
     <div class="table-content">
-
-      <div class="table-row" *ngFor="let item of todoList">
-        <div class="table-data">{{item.title}}</div>
-        <div class="table-data">{{item.description}}</div>
-        <div class="table-data">Edit Delete</div>
+      <div *ngIf="todoList && todoList.length">
+        <div class="table-row" *ngFor="let item of todoList">
+          <div class="table-data">{{item.title}}</div>
+          <div class="table-data">{{item.description}}</div>
+          <div class="table-data">
+            <button>
+              <a href="/todo/edit/{{item._id}}">Edit</a>
+            </button>
+            <button (click)="onClickDelete(item._id)">Delete</button>
+          </div>
+        </div>
       </div>
-
+      <div class="no-records-text" *ngIf="todoList">No records found</div>
     </div>
+
   </div>
 </div>
