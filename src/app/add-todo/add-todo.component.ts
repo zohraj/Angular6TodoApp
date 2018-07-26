@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
+import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-add-todo',
@@ -12,20 +13,22 @@ export class AddTodoComponent implements OnInit {
     title: '',
     description: ''
   }
+  baseUrl = environment.baseUrl
+  private user;
   constructor(private http: HttpClient, public router: Router) { }
 
   ngOnInit(): void {
-
+    this.user = JSON.parse(localStorage.getItem("currentUser"));
   }
   onSubmit = () => {
-    this.http.post("http://localhost:5000/add", {
+    this.http.post(this.baseUrl + "/add", {
       title: this.model.title,
       description: this.model.description,
-      createdBy:localStorage.getItem("token")
-    }).subscribe((data: any) => {
+      createdBy: this.user._id
+    }, { headers: { 'x-access-token': this.user.token } }).subscribe((data: any) => {
       this.router.navigate(['todo/list']);
     });
-    
+
   }
 
 }

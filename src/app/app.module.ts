@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -16,15 +15,19 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
+import { ChatService } from './app.chat.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { DirectChatComponent } from './direct-chat/direct-chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     TodoListComponent,
     AddTodoComponent,
-    EditTodoComponent
+    EditTodoComponent,
+    UserListComponent,
+    DirectChatComponent
   ],
   imports: [
     HttpModule,
@@ -42,7 +45,8 @@ import { EditTodoComponent } from './edit-todo/edit-todo.component';
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

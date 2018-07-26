@@ -1,0 +1,23 @@
+
+  <div *ngFor="let message of messages">
+   
+    <div class="container">
+      <img src="/assets/images/user.jpg" alt="Avatar">
+      <p> {{message}}</p>
+      <span class="time-right">11:00</span>
+    </div>
+  </div>
+  <div class="container">
+    <img src="/assets/images/user.jpg" alt="Avatar">
+    <p>Hello. How are you today?</p>
+    <span class="time-right">11:00</span>
+  </div>
+  
+  <!-- <div class="container darker">
+    <img src="/assets/images/user.jpg" alt="Avatar" class="right">
+    <p>Hey! I'm fine. Thanks for asking!</p>
+    <span class="time-left">11:01</span>
+  </div> -->
+  
+  <input [(ngModel)]="model.message" (keyup)="$event.keyCode == 13 && onClickSend()" />
+  <button id='sendMessage' (click)="onClickSend()">Send</button>

@@ -1,0 +1,47 @@
+<nav>
+  <div class="nav-bg"></div>
+  <ul>
+    <li>
+      <a href="todo/list"> Todo List</a>
+    </li>
+    <li>
+      <a href="todo/add">Add Todo</a>
+    </li>
+
+    <li>
+      <a href="login">Logout</a>
+    </li>
+
+  </ul>
+</nav>
+<div class="container">
+
+  <div class="table">
+    <div class="table-header">
+      <div class="header__item">
+        <a id="name" class="filter__link" href="#">Name</a>
+      </div>
+      <div class="header__item">
+        <a id="wins" class="filter__link filter__link--number" href="#">Email</a>
+      </div>
+
+      <div class="header__item">
+        <a id="total" class="filter__link filter__link--number" href="#">Action</a>
+      </div>
+    </div>
+
+    <div class="table-content">
+      <div *ngIf="userList && userList.length">
+        <div class="table-row" *ngFor="let user of userList">
+          <div class="table-data">{{user.name}}</div>
+          <div class="table-data">{{user.email}}</div>
+          <div class="table-data">
+            <button (click)="onClickChat(user._id)">Chat</button>
+          </div>
+        </div>
+      </div>
+      <div class="no-records-text" *ngIf="!userList">No records found</div>
+    </div>
+
+  </div>
+</div>

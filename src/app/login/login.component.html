@@ -2,33 +2,51 @@
 <div class="flex-wrap">
     <div class="bg"></div>
     <fieldset>
-        <form #myform="ngForm"  (ngSubmit)="myform.valid && onSubmit()" novalidate>
-            <input type="radio" name="rg" id="sign-in" value="1" [(ngModel)]="model.formType" required #formType="ngModel" checked/>
-            <input type="radio" name="rg" id="sign-up" value="2" [(ngModel)]="model.formType" required #formType="ngModel" />
-            <input type="radio" name="rg" id="reset" value="3" [(ngModel)]="model.formType" required #formType="ngModel" />
+        <input type="radio" name="rg" id="sign-in" value="1" [(ngModel)]="model.formType" required #formType="ngModel" checked />
+        <input type="radio" name="rg" id="sign-up" value="2" [(ngModel)]="model.formType" required #formType="ngModel" />
+        <input type="radio" name="rg" id="reset" value="3" [(ngModel)]="model.formType" required #formType="ngModel" />
 
-            <label for="sign-in">Sign in</label>
-            <label for="sign-up">Sign up</label>
-            <label for="reset">Reset</label>
+        <label for="sign-in">Sign in</label>
+        <label for="sign-up">Sign up</label>
+        <label for="reset">Reset</label>
 
+        <form #signupForm="ngForm" (ngSubmit)="signupForm.valid && onSubmitSignup()" novalidate *ngIf="model.formType==2">
             <input class="sign-up" name="name" required [(ngModel)]="model.name" #name="ngModel" [ngModelOptions]="{updateOn: 'change'}"
                 type="text" placeholder="Name" required />
-            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>
-
-            <input class="sign-in sign-up" name="username" type="text" placeholder="Username" required [(ngModel)]="model.username" #username="ngModel" [ngModelOptions]="{updateOn: 'change'}"
-            />
-            <div [hidden]="username.valid || username.pristine" class="alert alert-danger">Username is required</div>
-            <input class="sign-up reset" name="email" type="email" placeholder="Email" required [(ngModel)]="model.email" #email="ngModel"
+            <div [hidden]="name.valid || name.pristine" class="error alert alert-danger">Name is required</div>
+            <input class="sign-up" name="username" type="text" placeholder="Username" required [(ngModel)]="model.username" #username="ngModel"
                 [ngModelOptions]="{updateOn: 'change'}" />
-            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>
-            <input class="sign-up sign-in" name="password "type="password" placeholder="Password" required [(ngModel)]="model.password" #password="ngModel"
+            <div [hidden]="username.valid || username.pristine" class="error alert alert-danger">Username is required</div>
+            <input class="sign-up" name="email" type="email" placeholder="Email" required [(ngModel)]="model.email" #email="ngModel"
                 [ngModelOptions]="{updateOn: 'change'}" />
-            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
-            <input class="sign-up" name="repeatPassword" type="password" placeholder="Repeat Password" required [(ngModel)]="model.repeatPassword" #repeatPassword="ngModel"
+            <div [hidden]="email.valid || email.pristine" class=" error alert alert-danger">Email is required</div>
+            <input class="sign-up" name="password " type="password" placeholder="Password" required [(ngModel)]="model.password" #password="ngModel"
                 [ngModelOptions]="{updateOn: 'change'}" />
-            <div [hidden]="repeatPassword.valid || repeatPassword.pristine" class="alert alert-danger">Confirm Password is required</div>
+            <div [hidden]="password.valid || password.pristine" class=" error alert alert-danger">Password is required</div>
+            <input class="sign-up" name="repeatPassword" type="password" placeholder="Repeat Password" required [(ngModel)]="model.repeatPassword"
+                #repeatPassword="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+            <div [hidden]="repeatPassword.valid || repeatPassword.pristine" class="error alert alert-danger">Confirm Password is required</div>
             <button type="submit">Submit</button>
         </form>
+
+        <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmitLogin()" novalidate *ngIf="model.formType==1">
+            <input class="sign-in" name="username" type="text" placeholder="Username" required [(ngModel)]="model.username" #username="ngModel"
+                [ngModelOptions]="{updateOn: 'change'}" />
+            <div [hidden]="username.valid || username.pristine" class="error alert alert-danger">Username is required</div>
+            <input class="sign-in" name="password " type="password" placeholder="Password" required [(ngModel)]="model.password" #password="ngModel"
+                [ngModelOptions]="{updateOn: 'change'}" />
+            <div [hidden]="password.valid || password.pristine" class=" error alert alert-danger">Password is required</div>
+            <button type="submit">Submit</button>
+        </form>
+
+
+
+        <!-- <form #myform="ngForm" (ngSubmit)="myform.valid && onSubmit()" novalidate> -->
+
+
+
+        <!-- </form> -->
+
     </fieldset>
-   
+
 </div>

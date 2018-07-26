@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { ChatService } from '../app.chat.service';
+import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-todo-list',
@@ -8,20 +10,28 @@ import { HttpClient } from '@angular/common/http'
 })
 export class TodoListComponent implements OnInit {
   todoList: {}
-  constructor(private http: HttpClient) { }
+  baseUrl = environment.baseUrl;
+  constructor(private http: HttpClient, private chatService: ChatService) { }
 
   ngOnInit() {
-    var userId = localStorage.getItem('token');
-
-    this.http.get("http://localhost:5000/list/" + userId).subscribe(data => {
+    /**
+     * initiating the chat service for socket connection and events
+     */
+    this.chatService.init();
+    /** 
+     * currentUser is the logged in user 
+    */
+    var user = JSON.parse(localStorage.getItem('currentUser'));
+    this.http.get(this.baseUrl + "/list/" + user._id, { headers: { 'x-access-token': user.token } }).subscribe(data => {
       if (data) {
         this.todoList = data;
       }
 
     })
   }
+
   onClickDelete = (id) => {
-    this.http.delete("http://localhost:5000/delete/" + id).subscribe(data => {
+    this.http.delete(this.baseUrl + "/delete/" + id).subscribe(data => {
       window.location.reload();
     })
   }

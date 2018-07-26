@@ -12,20 +12,20 @@ input[type="radio"] {
 
 //    style input fields (note hidden by default) 
 input:not([type="radio"]) {
-    appearance: none;
+    // appearance: none;
     background-color: $color-input;
     display: block;
     transition: 300ms ease;
     border-radius: 7px;
     border: 0;
-    max-height: 0;
+    // max-height: 0;
     
     overflow: hidden;
     width: 70%;
     margin: 0 auto !important;
     padding: 0 10px;
     margin-bottom:10px !important;
-    opacity: 0;
+    // opacity: 0;
     font-size: 16px;
     text-align: center;
     outline: 0;
@@ -48,14 +48,15 @@ button {
     height: 40px;
     border-radius: 7px;    
     background-color: $color-accent;
-    font-size: 0;
+    font-size: 20px;
+    color:white;
     &:before { font-size: 16px; }
 }
 
 //    show botton text based on radio selection
-[id="sign-in"]:checked ~ button:before { content: 'Sign In'; }
-[id="sign-up"]:checked ~ button:before { content: 'Sign Up'; }
-[id="reset"]:checked ~ button:before { content: 'Reset password'; }
+// [id="sign-in"]:checked ~ button:before { content: 'Sign In'; }
+// [id="sign-up"]:checked ~ button:before { content: 'Sign Up'; }
+// [id="reset"]:checked ~ button:before { content: 'Reset password'; }
 
 
 //            
@@ -120,4 +121,23 @@ body {
 fieldset{
     z-index: 1;
     width:500px;
+}
+
+
+form{
+    input{
+        display: block;
+        opacity: 1;
+        height: 30px;
+        width: 95%;
+        max-height: 30px;
+    }
+    .error{
+        // display: block ;
+    
+    }
+    .alert{
+        color:darkred;
+
+    }
 }
