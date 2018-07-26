@@ -11,26 +11,29 @@ import { environment } from '../../environments/environment'
 export class DirectChatComponent implements OnInit {
   baseUrl = environment.baseUrl;
   model = {
-    message: ''
+    message: '',
+    conversation: '',
+    currentUser:''
   }
-  toUserId = '';
+  conversationId = '';
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private chatService: ChatService) { }
 
   ngOnInit() {
-    var currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.model.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    console.log(this.model.currentUser);
     var params = this.route.params.subscribe(params => {
-      this.toUserId = params.id;
-      this.http.post(this.baseUrl + "/chat/", {
-        to: params.id,
-        from: currentUser._id
-      }).subscribe(response => {
-        console.log(response);
+      this.conversationId = params.id;
+      this.http.get(this.baseUrl + "/chat/" + params.id).subscribe(response => {
+        
+        this.model.conversation = response["conversation"];
+        console.log("Message: ",this.model.conversation[0]);
       })
     })
 
   }
   onClickSend() {
-    this.chatService.sendMessage(this.toUserId, this.model.message);
+    this.chatService.sendMessage(this.conversationId, this.model.message);
   }
 
 }

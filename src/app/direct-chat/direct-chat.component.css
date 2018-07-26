@@ -69,3 +69,6 @@ input{
     -o-transition: all 0.30s ease-in-out;
     outline: none; 
 }
+.text-right{
+    text-align:right;
+}

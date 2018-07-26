@@ -1,23 +1,21 @@
+<div *ngFor="let message of model.conversation">
 
-  <div *ngFor="let message of messages">
-   
-    <div class="container">
-      <img src="/assets/images/user.jpg" alt="Avatar">
-      <p> {{message}}</p>
-      <span class="time-right">11:00</span>
-    </div>
-  </div>
-  <div class="container">
+  <div class="container" *ngIf="model.currentUser._id==message.author._id">
     <img src="/assets/images/user.jpg" alt="Avatar">
-    <p>Hello. How are you today?</p>
+    <h5>{{message.author.name}}</h5>
+    <p> {{message.body}}</p>
+    <span class="time-left">11:00</span>
+  </div>
+  <div class="container darker" *ngIf="model.currentUser._id!=message.author._id">
+    <img src="/assets/images/user.jpg" alt="Avatar" class="right">
+    <h5 class="text-right">{{message.author.name}}</h5>
+    <p class="text-right">{{message.body}}</p>
     <span class="time-right">11:00</span>
   </div>
-  
-  <!-- <div class="container darker">
-    <img src="/assets/images/user.jpg" alt="Avatar" class="right">
-    <p>Hey! I'm fine. Thanks for asking!</p>
-    <span class="time-left">11:01</span>
-  </div> -->
-  
-  <input [(ngModel)]="model.message" (keyup)="$event.keyCode == 13 && onClickSend()" />
-  <button id='sendMessage' (click)="onClickSend()">Send</button>
+</div>
+
+
+
+
+<input [(ngModel)]="model.message" (keyup)="$event.keyCode == 13 && onClickSend()" />
+<button id='sendMessage' (click)="onClickSend()">Send</button>
